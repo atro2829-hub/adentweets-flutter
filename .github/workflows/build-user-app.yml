@@ -1,0 +1,49 @@
+name: Build User App APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/build-admin-app.yml'
+      - 'admin_app/**'
+      - '*.md'
+
+env:
+  FLUTTER_VERSION: '3.27.4'
+  JAVA_VERSION: '21'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+          cache: true
+
+      - name: Get dependencies
+        working-directory: user_app
+        run: flutter pub get
+
+      - name: Build APK
+        working-directory: user_app
+        run: flutter build apk --debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: adentweets-user-app-debug
+          path: user_app/build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
