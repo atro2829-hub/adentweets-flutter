@@ -90,15 +90,6 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                       return _buildConversationItem(conv, currentUserId, index);
                     },
                   ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => context.push('/new-message'),
-          backgroundColor: AppColors.primary,
-          elevation: 4,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          child: const Icon(Icons.edit_rounded, color: Colors.white, size: 24),
-        ),
       ),
     );
   }

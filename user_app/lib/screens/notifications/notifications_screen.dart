@@ -9,6 +9,7 @@ import 'package:adentweets_app/core/widgets/loading_skeleton.dart';
 import 'package:adentweets_app/core/widgets/empty_state_widget.dart';
 import 'package:adentweets_app/providers/auth_provider.dart';
 import 'package:adentweets_app/providers/notification_provider.dart';
+import 'package:adentweets_app/widgets/bottom_nav_shell.dart';
 
 class NotificationsScreen extends ConsumerStatefulWidget {
   const NotificationsScreen({super.key});
@@ -101,96 +102,98 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
         ? notifState.notifications.where((n) => n.type == _selectedFilter).toList()
         : notifState.notifications;
 
-    return Scaffold(
-      backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
+    return BottomNavShell(
+      child: Scaffold(
         backgroundColor: AppColors.scaffoldBackground,
-        elevation: 0,
-        title: Text(
-          'الإشعارات',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
-        ),
-        centerTitle: true,
-        actions: [
-          if (notifState.unreadCount > 0)
-            TextButton(
-              onPressed: () {
-                final userId = ref.read(authProvider).user?.uid ?? '';
-                ref.read(notificationProvider.notifier).markAllAsRead(userId);
-              },
-              child: Text(
-                'تحديد الكل كمقروء',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: AppColors.primary,
-                    ),
-              ),
-            ),
-        ],
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 44,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              itemCount: _filterChips.length,
-              itemBuilder: (context, index) {
-                final chip = _filterChips[index];
-                final isSelected = _selectedFilter == chip['value'];
-                return Padding(
-                  padding: const EdgeInsetsDirectional.only(start: 6, end: 6),
-                  child: FilterChip(
-                    label: Text(chip['label']!),
-                    selected: isSelected,
-                    onSelected: (_) {
-                      setState(() {
-                        _selectedFilter = chip['value'];
-                      });
-                      ref.read(notificationProvider.notifier).setFilter(chip['value']);
-                    },
-                    selectedColor: AppColors.primaryContainer,
-                    labelStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: isSelected ? AppColors.primary : AppColors.textSecondary,
-                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                        ),
-                    side: BorderSide(
-                      color: isSelected ? AppColors.primary : AppColors.border,
-                    ),
-                    backgroundColor: Colors.transparent,
-                    showCheckmark: false,
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: VisualDensity.compact,
-                  ),
-                );
-              },
-            ),
+        appBar: AppBar(
+          backgroundColor: AppColors.scaffoldBackground,
+          elevation: 0,
+          title: Text(
+            'الإشعارات',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
-          const Divider(color: AppColors.divider, height: 1),
-          Expanded(
-            child: notifState.isLoading
-                ? LoadingSkeleton.notificationList(count: 6)
-                : filteredNotifs.isEmpty
-                    ? EmptyStateWidget(
-                        icon: Icons.notifications_off_outlined,
-                        title: 'لا توجد إشعارات',
-                        subtitle: _selectedFilter != null
-                            ? 'لا توجد إشعارات من هذا النوع'
-                            : 'ستظهر الإشعارات هنا',
-                      )
-                    : ListView.builder(
-                        itemCount: filteredNotifs.length,
-                        itemBuilder: (context, index) {
-                          final notif = filteredNotifs[index];
-                          return _buildNotificationItem(notif, index);
-                        },
+          centerTitle: true,
+          actions: [
+            if (notifState.unreadCount > 0)
+              TextButton(
+                onPressed: () {
+                  final userId = ref.read(authProvider).user?.uid ?? '';
+                  ref.read(notificationProvider.notifier).markAllAsRead(userId);
+                },
+                child: Text(
+                  'تحديد الكل كمقروء',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppColors.primary,
                       ),
-          ),
-        ],
+                ),
+              ),
+          ],
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 44,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                itemCount: _filterChips.length,
+                itemBuilder: (context, index) {
+                  final chip = _filterChips[index];
+                  final isSelected = _selectedFilter == chip['value'];
+                  return Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 6, end: 6),
+                    child: FilterChip(
+                      label: Text(chip['label']!),
+                      selected: isSelected,
+                      onSelected: (_) {
+                        setState(() {
+                          _selectedFilter = chip['value'];
+                        });
+                        ref.read(notificationProvider.notifier).setFilter(chip['value']);
+                      },
+                      selectedColor: AppColors.primaryContainer,
+                      labelStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                            color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                          ),
+                      side: BorderSide(
+                        color: isSelected ? AppColors.primary : AppColors.border,
+                      ),
+                      backgroundColor: Colors.transparent,
+                      showCheckmark: false,
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Divider(color: AppColors.divider, height: 1),
+            Expanded(
+              child: notifState.isLoading
+                  ? LoadingSkeleton.notificationList(count: 6)
+                  : filteredNotifs.isEmpty
+                      ? EmptyStateWidget(
+                          icon: Icons.notifications_off_outlined,
+                          title: 'لا توجد إشعارات',
+                          subtitle: _selectedFilter != null
+                              ? 'لا توجد إشعارات من هذا النوع'
+                              : 'ستظهر الإشعارات هنا',
+                        )
+                      : ListView.builder(
+                          itemCount: filteredNotifs.length,
+                          itemBuilder: (context, index) {
+                            final notif = filteredNotifs[index];
+                            return _buildNotificationItem(notif, index);
+                          },
+                        ),
+            ),
+          ],
+        ),
       ),
     );
   }

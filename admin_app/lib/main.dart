@@ -18,11 +18,21 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
+  // Firebase init - must succeed for app to work
+  bool firebaseReady = false;
+  String? firebaseError;
   try {
     await FirebaseService.initialize();
+    firebaseReady = true;
   } catch (e) {
+    firebaseError = e.toString();
     debugPrint('Firebase init error: $e');
   }
 
-  runApp(const ProviderScope(child: AdenTweetsAdminApp()));
+  runApp(ProviderScope(
+    child: AdenTweetsAdminApp(
+      firebaseReady: firebaseReady,
+      firebaseError: firebaseError,
+    ),
+  ));
 }

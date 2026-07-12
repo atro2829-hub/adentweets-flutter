@@ -1,12 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:adentweets_admin/core/router/app_router.dart';
 import 'package:adentweets_admin/core/theme/app_theme.dart';
+import 'package:adentweets_admin/core/theme/app_colors.dart';
+import 'package:adentweets_admin/core/router/app_router.dart';
 
 class AdenTweetsAdminApp extends StatelessWidget {
-  const AdenTweetsAdminApp({super.key});
+  final bool firebaseReady;
+  final String? firebaseError;
+
+  const AdenTweetsAdminApp({
+    super.key,
+    this.firebaseReady = true,
+    this.firebaseError,
+  });
 
   @override
   Widget build(BuildContext context) {
+    if (!firebaseReady) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        locale: const Locale('ar'),
+        home: Scaffold(
+          backgroundColor: AppColors.backgroundPrimary,
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.cloud_off, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'فشل الاتصال بالخادم',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    firebaseError ?? 'خطأ غير معروف',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppColors.textSecondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return MaterialApp.router(
       title: 'مركز إدارة أدن تويترز',
       debugShowCheckedModeBanner: false,

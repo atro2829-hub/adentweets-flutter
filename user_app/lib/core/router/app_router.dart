@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,13 +47,22 @@ import 'package:adentweets_app/screens/settings/privacy_settings_screen.dart';
 import 'package:adentweets_app/screens/settings/notification_settings_screen.dart';
 import 'package:adentweets_app/screens/settings/about_screen.dart';
 
+// Stable notifier for GoRouter refresh — never recreated
+final _routerRefreshNotifier = ChangeNotifier();
+
 final routerProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authProvider);
+  // Listen to auth changes — notify router to re-evaluate redirects
+  ref.listen(authProvider, (_, __) {
+    _routerRefreshNotifier.notifyListeners();
+  });
 
   return GoRouter(
     initialLocation: '/splash',
     debugLogDiagnostics: false,
+    refreshListenable: _routerRefreshNotifier,
     redirect: (context, state) {
+      // Use ref.read to get CURRENT state (not a stale captured value)
+      final authState = ref.read(authProvider);
       final isAuth = authState.status == AuthStatus.authenticated;
       final isSplash = state.matchedLocation == '/splash';
       final isLoginRoute = state.matchedLocation == '/login' ||

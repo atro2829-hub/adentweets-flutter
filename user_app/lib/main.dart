@@ -21,13 +21,20 @@ void main() async {
     ),
   );
 
+  // Firebase init - must succeed for app to work
+  bool firebaseReady = false;
+  String? firebaseError;
   try {
     await FirebaseService.initialize();
+    firebaseReady = true;
   } catch (e) {
+    firebaseError = e.toString();
     debugPrint('Firebase init error: $e');
   }
 
   DateFormatter.init();
 
-  runApp(const ProviderScope(child: App()));
+  runApp(ProviderScope(
+    child: App(firebaseReady: firebaseReady, firebaseError: firebaseError),
+  ));
 }
