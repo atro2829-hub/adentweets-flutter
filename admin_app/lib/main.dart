@@ -18,7 +18,11 @@ void main() async {
     statusBarBrightness: Brightness.dark,
   ));
 
-  await FirebaseService.initialize();
+  try {
+    await FirebaseService.initialize();
+  } catch (e) {
+    debugPrint('Firebase init error: $e');
+  }
 
   runApp(const ProviderScope(child: AdenTweetsAdminApp()));
 }

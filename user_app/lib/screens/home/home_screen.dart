@@ -53,6 +53,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authProvider);
+    final currentUserId = authState.user?.uid ?? '';
+
     return BottomNavShell(
       child: Scaffold(
         backgroundColor: AppColors.scaffoldBackground,
@@ -93,16 +96,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: GestureDetector(
-                onTap: () => context.push('/profile/${ref.read(authProvider).user?.uid ?? ''}'),
+                onTap: () => context.push('/profile/$currentUserId'),
                 child: CircleAvatar(
                   radius: 17,
                   backgroundColor: AppColors.surfaceElevated,
-                  backgroundImage: ref.read(authProvider).userData?.avatarBase64 != null
+                  backgroundImage: authState.userData?.avatarBase64 != null
                       ? MemoryImage(
-                          _decodeBase64(ref.read(authProvider).userData!.avatarBase64!),
+                          _safeDecodeBase64(authState.userData!.avatarBase64!),
                         )
                       : null,
-                  child: ref.read(authProvider).userData?.avatarBase64 == null
+                  child: authState.userData?.avatarBase64 == null
                       ? Icon(Icons.person, size: 18, color: AppColors.iconTertiary)
                       : null,
                 ),
@@ -145,28 +148,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             ),
           ],
         ),
-        floatingActionButton: SizedBox(
-          width: 52,
-          height: 52,
-          child: FloatingActionButton(
-            onPressed: () => context.push('/create-post'),
-            backgroundColor: AppColors.primary,
-            elevation: 4,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
-            child: const Icon(
-              Icons.add_rounded,
-              color: Colors.white,
-              size: 28,
-            ),
-          ),
-        ),
       ),
     );
   }
 
-  Uint8List _decodeBase64(String str) {
+  Uint8List _safeDecodeBase64(String str) {
     try {
       return base64Decode(str);
     } catch (_) {

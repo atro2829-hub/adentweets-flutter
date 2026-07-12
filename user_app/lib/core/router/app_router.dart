@@ -18,6 +18,7 @@ import 'package:adentweets_app/screens/post/create_post_screen.dart';
 import 'package:adentweets_app/screens/post/post_detail_screen.dart';
 
 // ── Profile Screens ─────────────────────────────────────────
+import 'package:adentweets_app/screens/profile/profile_screen.dart';
 import 'package:adentweets_app/screens/profile/other_profile_screen.dart';
 import 'package:adentweets_app/screens/profile/edit_profile_screen.dart';
 import 'package:adentweets_app/screens/profile/user_list_screen.dart';
@@ -113,7 +114,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               final userId = state.pathParameters['userId']!;
               final currentUserId = ref.read(authProvider).user?.uid ?? '';
               if (userId == currentUserId) {
-                return const HomeScreen();
+                return const ProfileScreen();
               }
               return OtherProfileScreen(userId: userId);
             },

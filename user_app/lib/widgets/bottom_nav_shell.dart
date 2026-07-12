@@ -18,18 +18,40 @@ class BottomNavShell extends ConsumerStatefulWidget {
 
 class _BottomNavShellState extends ConsumerState<BottomNavShell> {
   int _currentIndex = 0;
+  String _lastLoadedUserId = '';
+  bool _initialLoadDone = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadDataIfNeeded();
+    });
+  }
+
+  void _loadDataIfNeeded() {
+    final authState = ref.read(authProvider);
+    final currentUserId = authState.user?.uid ?? '';
+    if (currentUserId.isNotEmpty && currentUserId != _lastLoadedUserId) {
+      _lastLoadedUserId = currentUserId;
+      _initialLoadDone = true;
+      ref.read(notificationProvider.notifier).loadNotifications(currentUserId);
+      ref.read(chatProvider.notifier).loadConversations(currentUserId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final notifState = ref.watch(notificationProvider);
     final chatState = ref.watch(chatProvider);
-    final authState = ref.watch(authProvider);
-    final currentUserId = authState.user?.uid ?? '';
 
-    if (currentUserId.isNotEmpty) {
-      ref.read(notificationProvider.notifier).loadNotifications(currentUserId);
-      ref.read(chatProvider.notifier).loadConversations(currentUserId);
-    }
+    // React to auth changes to reload data
+    ref.listen<AuthState>(authProvider, (prev, next) {
+      final newId = next.user?.uid ?? '';
+      if (newId.isNotEmpty && newId != _lastLoadedUserId) {
+        _loadDataIfNeeded();
+      }
+    });
 
     return Scaffold(
       body: widget.child,
