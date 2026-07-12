@@ -5,6 +5,11 @@
 -keep class io.flutter.view.**  { *; }
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
+-keep class io.flutter.embedding.** { *; }
+
+# Google Play Core (Flutter dependency)
+-dontwarn com.google.android.play.core.**
+-keep class com.google.android.play.core.** { *; }
 
 # Firebase
 -keep class com.google.firebase.** { *; }
@@ -15,7 +20,7 @@
 # Google Sign-In
 -keep class com.google.android.gms.auth.api.signin.** { *; }
 
-# Model classes (keep all since they use fromJson/toJson)
+# Model classes
 -keep class com.adentweets.app.** { *; }
 -keepclassmembers class com.adentweets.app.** { *; }
 
@@ -33,8 +38,5 @@
 # Riverpod
 -keep class * extends com.riverpod.** { *; }
 
-# Gson / JSON
--keepattributes Signature
--keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
--dontwarn sun.misc.Unsafe
+# General
+-dontwarn java.lang.invoke.StringConcatFactory

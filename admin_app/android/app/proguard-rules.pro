@@ -5,6 +5,11 @@
 -keep class io.flutter.view.**  { *; }
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
+-keep class io.flutter.embedding.** { *; }
+
+# Google Play Core (Flutter dependency)
+-dontwarn com.google.android.play.core.**
+-keep class com.google.android.play.core.** { *; }
 
 # Firebase
 -keep class com.google.firebase.** { *; }
@@ -27,11 +32,5 @@
 -dontwarn kotlin.**
 -keep class kotlin.Metadata { *; }
 
-# Riverpod
--keep class * extends com.riverpod.** { *; }
-
-# Gson / JSON
--keepattributes Signature
--keepattributes *Annotation*
--keep class sun.misc.Unsafe { *; }
--dontwarn sun.misc.Unsafe
+# General
+-dontwarn java.lang.invoke.StringConcatFactory
