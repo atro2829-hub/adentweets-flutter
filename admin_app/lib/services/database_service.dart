@@ -29,7 +29,7 @@ class DatabaseService {
   }
 
   static Query query(String path, {int? limitToFirst, String? orderBy, String? startAt, String? endAt}) {
-    var query = _db.child(path);
+    Query query = _db.child(path);
     if (orderBy != null) {
       query = query.orderByChild(orderBy);
     }
@@ -66,7 +66,7 @@ class DatabaseService {
   }
 
   static Future<List<Map<String, dynamic>>> getList(String path, {int limit = 20, String? orderBy, bool descending = true}) async {
-    var query = _db.child(path);
+    Query query = _db.child(path);
     if (orderBy != null) {
       query = query.orderByChild(orderBy);
     }

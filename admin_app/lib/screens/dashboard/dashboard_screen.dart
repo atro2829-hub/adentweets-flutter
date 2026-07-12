@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:adentweets_admin/core/theme/app_colors.dart';
 import 'package:adentweets_admin/core/utils/date_formatter.dart';
@@ -140,7 +140,7 @@ class DashboardScreen extends ConsumerWidget {
           StatsCard(
             label: 'بلاغات معلقة',
             value: stats['pendingReports'] ?? 0,
-            icon: Iconsax.shield_warning,
+            icon: Iconsax.shield_cross,
             iconColor: AppColors.error,
             changePercent: -3.1,
             onTap: () => context.go('/reports'),
@@ -194,7 +194,7 @@ class DashboardScreen extends ConsumerWidget {
                 ),
                 const SizedBox(width: 10),
                 _QuickActionChip(
-                  icon: Iconsax.shield_warning,
+                  icon: Iconsax.shield_cross,
                   label: 'عرض البلاغات',
                   color: AppColors.error,
                   onTap: () => context.go('/reports'),

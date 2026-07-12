@@ -110,7 +110,7 @@ class ChatService {
     try {
       await _db.updateData(
         '${AppConstants.conversationsPath}/$conversationId/participants/$userId',
-        DateTime.now().millisecondsSinceEpoch,
+        {'lastRead': DateTime.now().millisecondsSinceEpoch},
       );
     } catch (e) {
       // Silent

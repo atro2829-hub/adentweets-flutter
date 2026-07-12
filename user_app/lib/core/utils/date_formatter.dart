@@ -6,7 +6,6 @@ class DateFormatter {
 
   static void init() {
     timeago.setLocaleMessages('ar', timeago.ArMessages());
-    timeago.defaultLocale = 'ar';
   }
 
   static String relativeTime(DateTime dateTime) {

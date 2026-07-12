@@ -7,7 +7,8 @@ import 'package:adentweets_app/core/theme/app_colors.dart';
 import 'package:adentweets_app/core/utils/date_formatter.dart';
 import 'package:adentweets_app/models/post_model.dart';
 import 'package:adentweets_app/providers/auth_provider.dart';
-import 'package:adentweets_app/widgets/verification_badge.dart';
+import 'package:adentweets_app/models/user_model.dart';
+import 'package:adentweets_app/core/widgets/verification_badge.dart';
 import 'package:adentweets_app/services/post_service.dart';
 
 class RepostScreen extends ConsumerStatefulWidget {

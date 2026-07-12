@@ -30,7 +30,7 @@ class ProfileState {
     bool? isLoadingPosts,
     bool? isFollowing,
     String? error,
-    bool clearError,
+    bool clearError = false,
   }) {
     return ProfileState(
       user: user ?? this.user,

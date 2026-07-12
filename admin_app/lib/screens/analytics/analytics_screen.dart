@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:adentweets_admin/core/theme/app_colors.dart';
 import 'package:adentweets_admin/core/utils/responsive_utils.dart';
@@ -167,14 +167,16 @@ class AnalyticsScreen extends ConsumerWidget {
                                     padding: const EdgeInsets.only(bottom: 10),
                                     child: Row(
                                       children: [
-                                        Text(
-                                          '${index + 1}',
-                                          style: TextStyle(
-                                            color: index < 3 ? AppColors.accentPrimary : AppColors.textTertiary,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        SizedBox(
                                           width: 20,
+                                          child: Text(
+                                            '${index + 1}',
+                                            style: TextStyle(
+                                              color: index < 3 ? AppColors.accentPrimary : AppColors.textTertiary,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
                                         ),
                                         const SizedBox(width: 8),
                                         Expanded(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adentweets_app/core/theme/app_colors.dart';
 import 'package:adentweets_app/core/widgets/empty_state_widget.dart';
@@ -7,16 +8,16 @@ import 'package:adentweets_app/core/widgets/loading_skeleton.dart';
 import 'package:adentweets_app/providers/feed_provider.dart';
 import 'package:adentweets_app/widgets/post_card.dart';
 
-class FeedTab extends ConsumerStatefulWidget {
+class FeedTabWidget extends ConsumerStatefulWidget {
   final FeedTab feedType;
 
-  const FeedTab({super.key, required this.feedType});
+  const FeedTabWidget({super.key, required this.feedType});
 
   @override
-  ConsumerState<FeedTab> createState() => _FeedTabState();
+  ConsumerState<FeedTabWidget> createState() => _FeedTabWidgetState();
 }
 
-class _FeedTabState extends ConsumerState<FeedTab> {
+class _FeedTabWidgetState extends ConsumerState<FeedTabWidget> {
   final ScrollController _scrollController = ScrollController();
 
   @override

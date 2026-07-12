@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:adentweets_admin/core/utils/responsive_utils.dart';
 import 'package:adentweets_admin/providers/admin_auth_provider.dart';
 import 'package:adentweets_admin/providers/admin_reports_provider.dart';
@@ -22,14 +22,14 @@ class _AdminNavShellState extends ConsumerState<AdminNavShell> {
   static const _mainNavItems = [
     _NavItem('/dashboard', Iconsax.home_2, 'لوحة التحكم'),
     _NavItem('/users', Iconsax.user, 'المستخدمون'),
-    _NavItem('/reports', Iconsax.shield_warning, 'البلاغات', showBadge: true),
+    _NavItem('/reports', Iconsax.shield_cross, 'البلاغات', showBadge: true),
     _NavItem('/analytics', Iconsax.chart_2, 'التحليلات'),
   ];
 
   static const _moreNavItems = [
     _NavItem('/posts', Iconsax.document_text, 'المنشورات'),
     _NavItem('/comments', Iconsax.message_text, 'التعليقات'),
-    _NavItem('/verification', Iconsax.verified, 'التوثيق'),
+    _NavItem('/verification', Iconsax.verify, 'التوثيق'),
     _NavItem('/trending', Iconsax.hashtag, 'الترندات'),
     _NavItem('/settings', Iconsax.setting_2, 'الإعدادات'),
     _NavItem('/activity-log', Iconsax.clock, 'سجل النشاط'),
@@ -175,7 +175,7 @@ class _AdminNavShellState extends ConsumerState<AdminNavShell> {
             ),
             const Divider(height: 1),
             _buildDrawerItem(
-              icon: Iconsax.logout_2,
+              icon: Iconsax.logout,
               label: 'تسجيل الخروج',
               iconColor: AppColors.error,
               labelColor: AppColors.error,

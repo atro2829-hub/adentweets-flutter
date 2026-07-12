@@ -24,8 +24,8 @@ class NotificationState {
     bool? isLoading,
     String? filterType,
     String? error,
-    bool clearError,
-    bool clearFilter,
+    bool clearError = false,
+    bool clearFilter = false,
   }) {
     return NotificationState(
       notifications: notifications ?? this.notifications,

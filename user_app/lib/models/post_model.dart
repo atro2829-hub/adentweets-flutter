@@ -109,7 +109,7 @@ class PostModel {
     String? parentPostId,
     String? repostedBy,
     List<String>? hashtags,
-    bool clearImage,
+    bool clearImage = false,
   }) {
     return PostModel(
       postId: postId ?? this.postId,

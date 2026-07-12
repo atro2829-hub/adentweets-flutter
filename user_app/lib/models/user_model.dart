@@ -110,8 +110,8 @@ class UserModel {
     DateTime? createdAt,
     DateTime? lastActive,
     bool? isOnline,
-    bool clearAvatar,
-    bool clearBanner,
+    bool clearAvatar = false,
+    bool clearBanner = false,
   }) {
     return UserModel(
       uid: uid ?? this.uid,

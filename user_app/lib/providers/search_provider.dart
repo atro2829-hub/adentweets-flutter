@@ -28,8 +28,8 @@ class SearchState {
     List<TrendingModel>? trending,
     bool? isLoading,
     String? error,
-    bool clearError,
-    bool clearResults,
+    bool clearError = false,
+    bool clearResults = false,
   }) {
     return SearchState(
       query: query ?? this.query,

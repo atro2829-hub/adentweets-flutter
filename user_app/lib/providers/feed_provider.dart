@@ -31,8 +31,8 @@ class FeedState {
     String? lastKey,
     FeedTab? currentTab,
     String? error,
-    bool clearError,
-    bool clearPosts,
+    bool clearError = false,
+    bool clearPosts = false,
   }) {
     return FeedState(
       posts: clearPosts ? [] : (posts ?? this.posts),

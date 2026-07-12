@@ -20,7 +20,7 @@ class NotificationsScreen extends ConsumerStatefulWidget {
 class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
   String? _selectedFilter;
 
-  final List<Map<String, String>> _filterChips = [
+  final List<Map<String, String?>> _filterChips = [
     {'value': null, 'label': 'الكل'},
     {'value': 'like', 'label': 'الإعجابات'},
     {'value': 'follow', 'label': 'المتابَعين'},
@@ -275,7 +275,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    DateFormatter.notificationTime(notif.createdAt),
+                    DateFormatter.formatNotificationTime(notif.createdAt),
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: AppColors.textTertiary,
                         ),

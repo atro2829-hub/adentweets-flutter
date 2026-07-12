@@ -189,16 +189,12 @@ class AppTheme {
           color: AppColors.iconSecondary,
           size: 24,
         ),
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return AppTypography.textTheme.labelSmall?.copyWith(
-              color: AppColors.primary,
-            );
-          }
-          return AppTypography.textTheme.labelSmall?.copyWith(
-            color: AppColors.iconSecondary,
-          );
-        }),
+        selectedLabelTextStyle: AppTypography.textTheme.labelSmall?.copyWith(
+          color: AppColors.primary,
+        ),
+        unselectedLabelTextStyle: AppTypography.textTheme.labelSmall?.copyWith(
+          color: AppColors.iconSecondary,
+        ),
       ),
 
       // ── Tab Bar ────────────────────────────────────────────

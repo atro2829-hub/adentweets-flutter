@@ -13,6 +13,8 @@ import 'package:adentweets_app/core/widgets/verification_badge.dart';
 import 'package:adentweets_app/providers/auth_provider.dart';
 import 'package:adentweets_app/providers/profile_provider.dart';
 import 'package:adentweets_app/widgets/post_card.dart';
+import 'package:adentweets_app/widgets/bottom_nav_shell.dart';
+import 'package:adentweets_app/models/user_model.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});

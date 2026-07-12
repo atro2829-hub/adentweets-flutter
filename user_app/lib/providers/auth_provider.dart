@@ -25,8 +25,8 @@ class AuthState {
     User? user,
     UserModel? userData,
     String? errorMessage,
-    bool clearError,
-    bool clearUser,
+    bool clearError = false,
+    bool clearUser = false,
   }) {
     return AuthState(
       status: status ?? this.status,

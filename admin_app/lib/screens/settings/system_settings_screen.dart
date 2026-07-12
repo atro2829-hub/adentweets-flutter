@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:adentweets_admin/core/theme/app_colors.dart';
 import 'package:adentweets_admin/core/constants/app_constants.dart';
 import 'package:adentweets_admin/core/utils/responsive_utils.dart';

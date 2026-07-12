@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:adentweets_app/core/theme/app_colors.dart';
 import 'package:adentweets_app/core/constants/app_constants.dart';
@@ -136,8 +138,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  FeedTab(feedType: FeedTab.forYou),
-                  FeedTab(feedType: FeedTab.following),
+                  FeedTabWidget(feedType: FeedTab.forYou),
+                  FeedTabWidget(feedType: FeedTab.following),
                 ],
               ),
             ),

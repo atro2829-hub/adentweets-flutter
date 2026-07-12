@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:adentweets_admin/core/theme/app_colors.dart';
 import 'package:adentweets_admin/core/utils/date_formatter.dart';
@@ -252,7 +252,7 @@ class _TrendingItem extends StatelessWidget {
       child: Row(
         children: [
           if (item.isPinned)
-            Icon(Iconsax.pin, size: 16, color: AppColors.accentPrimary)
+            Icon(Icons.push_pin, size: 16, color: AppColors.accentPrimary)
           else
             Icon(Iconsax.hashtag, size: 16, color: AppColors.textTertiary),
           const SizedBox(width: 10),

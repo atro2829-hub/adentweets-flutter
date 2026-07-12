@@ -12,7 +12,7 @@ class FollowService {
     try {
       await _db.setData(
         '${AppConstants.followsPath}/$followerId/$followingId',
-        DateTime.now().millisecondsSinceEpoch,
+        {'timestamp': DateTime.now().millisecondsSinceEpoch},
       );
 
       await _db.incrementValue(

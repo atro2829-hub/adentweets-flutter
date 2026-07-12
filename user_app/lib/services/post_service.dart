@@ -100,7 +100,7 @@ class PostService {
     try {
       await _db.setData(
         '${AppConstants.likesPath}/$postId/$userId',
-        true,
+        {'liked': true},
       );
       await _db.incrementValue(
         '${AppConstants.postsPath}/$postId',
@@ -140,7 +140,7 @@ class PostService {
     try {
       await _db.setData(
         '${AppConstants.bookmarksPath}/$userId/$postId',
-        true,
+        {'bookmarked': true},
       );
     } catch (e) {
       throw Exception('فشل في حفظ المنشور');

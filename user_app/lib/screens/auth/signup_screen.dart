@@ -26,6 +26,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   int _currentStep = 0;
   String? _avatarBase64;
   bool _obscurePassword = true;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -122,7 +123,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       }
     });
 
-    final isLoading = authState.status == AuthStatus.loading;
+    _isLoading = authState.status == AuthStatus.loading;
 
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
@@ -131,7 +132,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: AppColors.iconPrimary),
-          onPressed: isLoading ? null : () {
+          onPressed: _isLoading ? null : () {
             if (_currentStep > 0) {
               _previousStep();
             } else {
@@ -167,7 +168,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 width: double.infinity,
                 height: 52,
                 child: ElevatedButton(
-                  onPressed: isLoading ? null : _nextStep,
+                  onPressed: _isLoading ? null : _nextStep,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.onPrimary,
@@ -177,7 +178,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     ),
                     elevation: 0,
                   ),
-                  child: isLoading
+                  child: _isLoading
                       ? const SizedBox(
                           width: 24,
                           height: 24,
@@ -250,7 +251,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             label: 'الاسم الكامل',
             hint: 'محمد أحمد',
             icon: Icons.person_outline_rounded,
-            enabled: !isLoading,
+            enabled: !_isLoading,
           ).animate().fadeIn(delay: 150.ms, duration: 300.ms),
           const SizedBox(height: 20),
           _buildInputField(
@@ -258,7 +259,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             label: 'اسم المستخدم',
             hint: 'mohammed_ahmed',
             icon: Icons.alternate_email_rounded,
-            enabled: !isLoading,
+            enabled: !_isLoading,
           ).animate().fadeIn(delay: 200.ms, duration: 300.ms),
         ],
       ),
@@ -293,7 +294,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
             hint: 'example@email.com',
             icon: Icons.mail_outline_rounded,
             keyboardType: TextInputType.emailAddress,
-            enabled: !isLoading,
+            enabled: !_isLoading,
           ).animate().fadeIn(delay: 150.ms, duration: 300.ms),
           const SizedBox(height: 20),
           Column(
@@ -310,7 +311,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
               TextFormField(
                 controller: _passwordController,
                 obscureText: _obscurePassword,
-                enabled: !isLoading,
+                enabled: !_isLoading,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: AppColors.textPrimary,
                     ),

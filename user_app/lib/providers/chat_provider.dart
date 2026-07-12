@@ -30,8 +30,8 @@ class ChatState {
     int? unreadTotal,
     String? currentConversationId,
     String? error,
-    bool clearError,
-    bool clearMessages,
+    bool clearError = false,
+    bool clearMessages = false,
   }) {
     return ChatState(
       conversations: conversations ?? this.conversations,

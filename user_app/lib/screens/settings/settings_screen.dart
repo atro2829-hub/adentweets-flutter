@@ -87,7 +87,7 @@ class SettingsScreen extends ConsumerWidget {
                       ),
                 ),
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: AppColors.error.withValues(alpha: 0.3)),
+                  side: BorderSide(color: AppColors.error.withValues(alpha: 0.3)),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),

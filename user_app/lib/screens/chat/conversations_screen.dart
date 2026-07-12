@@ -10,6 +10,7 @@ import 'package:adentweets_app/core/widgets/loading_skeleton.dart';
 import 'package:adentweets_app/core/widgets/empty_state_widget.dart';
 import 'package:adentweets_app/providers/auth_provider.dart';
 import 'package:adentweets_app/providers/chat_provider.dart';
+import 'package:adentweets_app/models/conversation_model.dart';
 import 'package:adentweets_app/widgets/bottom_nav_shell.dart';
 
 class ConversationsScreen extends ConsumerStatefulWidget {

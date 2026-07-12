@@ -49,7 +49,7 @@ class MessageModel {
     DateTime? createdAt,
     String? type,
     bool? isRead,
-    bool clearImage,
+    bool clearImage = false,
   }) {
     return MessageModel(
       messageId: messageId ?? this.messageId,
